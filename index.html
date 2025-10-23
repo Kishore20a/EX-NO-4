@@ -3,140 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event Planning Portal</title>
+    <title>EventPlanner</title>
     <style>
-        /* Basic CSS for styling (consider using an external CSS file for larger projects) */
+        /* Base styles and color variables */
+        :root {
+            --background-color: #464744; /* Black background */
+            --text-color: #af890b; /* Dark blue letters */
+            --link-color: #aa0606; /* Red for links */
+            --link-hover-color: #cc0000; /* Darker red for link hover */
+            --primary-color: #4a90e2; /* Blue primary color */
+            --card-background: #000000; /* A slightly lighter black for cards */
+            --button-bg: #046454; /* Blue button background */
+            --button-text: #f4f4f5; /* White button text */
+        }
         body {
+            background-color: var(--background-color);
+            color: var(--text-color);
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
-        }
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 1rem 0;
-            text-align: center;
-        }
-        nav {
-            background-color: #3b3b3b;
-            padding: 0.5rem 0;
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex; /* Use flexbox for responsive navigation */
-            justify-content: center;
-        }
-        nav ul li {
-            margin: 0 1rem;
-        }
-        nav ul li a {
-            color: #fff;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            display: block;
-        }
-        nav ul li a:hover {
-            background-color: #555;
-        }
-        .main-content {
-            padding: 2rem;
-            max-width: 1200px;
-            margin: 2rem auto;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .event-listing {
-            border-bottom: 1px solid #eee;
-            padding-bottom: 1rem;
-            margin-bottom: 1rem;
-        }
-        .event-listing:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-        }
-        .event-listing h2 {
-            color: #333;
-            margin-top: 0;
-        }
-        .event-listing p {
-            color: #666;
             line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
-        footer {
-            background-color: #333;
-            color: #fff;
+
+        header, footer {
+            background-color: var(--card-background);
+            color: var(--text-color);
+            padding: 1rem 2rem;
             text-align: center;
-            padding: 1rem 0;
-            position: fixed;
-            bottom: 0;
+        }
+
+        /* Set specific text color for headers to dark blue */
+        header h1, section h2, h3 {
+            color: var(--text-color);
+        }
+
+        .event-card {
+            background-color: var(--card-background);
+            color: var(--text-color);
+            border: 1px solid #968484;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Accessibility: Skip to main content link */
+        .skip-to-main {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #d1ff06;
+            color: white;
+            padding: 8px;
+            z-index: 100;
+            transition: top 0.3s ease;
+        }
+
+        .skip-to-main:focus {
+            top: 0;
+        }
+
+        /* Links */
+        nav a, .footer-nav a, .social-links a {
+            color: var(--link-color); /* Apply red link color */
+            text-decoration: none;
+        }
+
+        nav a:hover, .footer-nav a:hover, .social-links a:hover {
+            color: var(--link-hover-color); /* Apply darker red on hover */
+            text-decoration: underline;
+        }
+
+        /* Buttons */
+        .button {
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #357ABD;
+        }
+
+        /* Form elements */
+        form label {
+            color: var(--text-color);
+        }
+
+        form input[type="text"],
+        form input[type="email"],
+        form textarea {
+            background-color: #333333;
+            color: #ffffff; /* White text inside input fields for visibility */
+            border: 1px solid #555555;
+            padding: 0.5rem;
+            border-radius: 4px;
             width: 100%;
         }
 
-        /* Responsive adjustments for smaller screens */
-        @media (max-width: 768px) {
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-            }
-            nav ul li {
-                margin: 0.5rem 0;
-            }
+        /* Ensure good focus visibility */
+        :focus {
+            outline: 3px solid var(--primary-color);
+            outline-offset: 2px;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Event Planning Central</h1>
+
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#events">Events</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
     </header>
-
-    <nav>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Events</a></li>
-            <li><a href="#">Create Event</a></li>
-            <li><a href="#">Contact Us</a></li>
-        </ul>
-    </nav>
-
- 
-
-    <div class="main-content">
-        <section>
-            <h2>Upcoming Events</h2>
-
-            <div class="event-listing">
-                <h3>Annual Tech Conference</h3>
-                <p><strong>Date:</strong> October 26, 2025</p>
-                <p><strong>Location:</strong> Convention Center, Chennai</p>
-                <p>Join industry leaders and innovators for a day of insightful discussions and networking opportunities. Learn about the latest trends in artificial intelligence, cybersecurity, and cloud computing.</p>
-                <a href="#">View Details</a>
-            </div>
-
-            <div class="event-listing">
-                <h3>Local Food Festival</h3>
-                <p><strong>Date:</strong> November 15-16, 2025</p>
-                <p><strong>Location:</strong> City Park Grounds, Coimbatore</p>
-                <p>Indulge in a culinary journey showcasing diverse local and international cuisines. Enjoy live music, cooking demonstrations, and activities for all ages.</p>
-                <a href="#">View Details</a>
-            </div>
-            
-            <div class="event-listing">
-                <h3>Charity Fun Run</h3>
-                <p><strong>Date:</strong> December 5, 2025</p>
-                <p><strong>Location:</strong> Beach Road, Puducherry</p>
-                <p>Run for a cause and help raise funds for local charities supporting education and environmental initiatives. All fitness levels are welcome!</p>
-                <a href="#">View Details</a>
+    <main id="main-content">
+        <section id="home">
+            <h2>Welcome to EventPlanner!</h2>
+            <p>Your one-stop solution for planning unforgettable events.</p>
+            <a href="#events" class="button">Explore Events</a>
+        </section>
+        <section id="events" aria-labelledby="events-heading">
+            <h2 id="events-heading">Upcoming Events</h2>
+            <div class="event-list">
+                <article class="event-card">
+                    <h3>Summer Music Festival</h3>
+                    <p><strong>Date:</strong> August 20, 2025</p>
+                    <p><strong>Location:</strong> Central Park</p>
+                    <a href="#" class="button" aria-label="View details for Summer Music Festival">View Details</a>
+                </article>
+                <article class="event-card">
+                    <h3>Tech Conference 2025</h3>
+                    <p><strong>Date:</strong> September 15, 2025</p>
+                    <p><strong>Location:</strong> Convention Center</p>
+                    <a href="#" class="button" aria-label="View details for Tech Conference 2025">View Details</a>
+                </article>
             </div>
         </section>
-    </div>
-</div>
+        <section id="about" aria-labelledby="about-heading">
+            <h2 id="about-heading"></h2>
+            <p>.</p>
+        </section>
+        <section id="contact" aria-labelledby="contact-heading">
+            <h2 id="contact-heading">Contact Us</h2>
+            <form>
+                <div>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div>
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="4"></textarea>
+                </div>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+    </main>
     <footer>
-        <p> </p>
+        <div class="footer-content">
+            
+                
+            <p></p>
+        </div>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentYearSpan = document.getElementById('current-year');
+
+            // Set the copyright year
+            if (currentYearSpan) {
+                currentYearSpan.textContent = new Date().getFullYear();
+            }
+        });
+    </script>
 </body>
 </html>
-
